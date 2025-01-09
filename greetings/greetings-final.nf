@@ -18,7 +18,7 @@ nextflow.enable.dsl = 2
     // The script section that prints the statement
     script:
     """
-    echo 'Hello, welcome to the NBC Nextflow Workshop!'
+    echo "Hello, welcome to the NBC Nextflow Workshop!"
     """
  }
 
