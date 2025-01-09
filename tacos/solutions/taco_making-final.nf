@@ -71,9 +71,9 @@ process assembleTaco {
     label 'assembling_tacos'
 
     input:
-        path prep_tortilla
-        path cooked_protein
-        path prep_toppings
+        val prep_tortilla
+        val cooked_protein
+        val prep_toppings
     
     output:
         path ( 'assembled_taco.txt' )
@@ -99,7 +99,7 @@ workflow  {
 
     // Validate required parameters
     if (params.protein != "steak" && params.protein != "chicken" && params.protein != "carnitas" && params.protein != "sofritas" ) {
-        exit 1, "Please select your choice of proteins. We have: beef, chicken, pork and soya"
+        exit 1, "Please select your choice of proteins. We have: steak, chicken, carnitas and sofritas"
     }
 
     if (params.tortilla != "flour" && params.tortilla != "corn") {
@@ -114,8 +114,7 @@ workflow  {
 
 
     // Define toppings channels
-    //toppings_ch = Channel.fromPath(params.toppings_list)
-    toppings_ch = Channel.fromPath(params.toppings_list)
+    Channel.of(params.toppings_list).collect().set{ toppings_ch }
 
 
     println ( "Welcome to the Nextflow Taco-Making Tutorial!" )
@@ -125,7 +124,7 @@ workflow  {
     println ( "We will start by customizing your taco with the following defaults:" )
     println ( "- Protein: ${params.protein}" )
     println ( "- Tortilla: ${params.tortilla}" )
-    println ( "- Toppings: ${toppings_ch}" )
+    println ( "- Toppings: ${params.toppings_list}" )
 
     // --------------------
     //   Pipeline Steps
