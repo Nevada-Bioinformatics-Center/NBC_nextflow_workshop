@@ -215,15 +215,22 @@ git clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.
 
 # Getting Started
 
-## Nextflow 101
+## Objectives
 
-Nextflow pipelines have three main parts: *processes*, *channels*, and *workflows*.
+1.  Understand the structure of a basic Nextflow script
+2.  Create a simple process to print a message
+3.  Define a workflow to run that message
+4.  Execute the script to see the results
 
-## Nextflow 101 contd ..
+## 
 
--   A ***process*** defines the command or script to execute, while the ***executor*** determines how it's run on the target system.
+So, we will be creating a simple script that prints a welcoming message.
 
--   It should be noted that, Nextflow separates the functional logic of the pipeline from the execution platform.
+We want to print the following message by bash code but in nextflow.
+
+``` bash
+echo "Hello, welcome to the NBC Nextflow Workshop!"
+```
 
 ## Your first script
 
@@ -305,4 +312,59 @@ nextflow.enable.dsl = 2
  }
 ```
 
+## Nextflow 101
+
+Nextflow pipelines have three main parts: *processes, channels* and *workflows*.
+
+![Nextflow process flow diagram](images/process_channels_workflows.png)
+
+## Nextflow 101 contd .. {.scrollable}
+
+-   A ***process*** defines the command or script to execute, while the ***executor*** determines how it's run on the target system.
+
+    ![Nextflow Executors](images/executors.png){width="4.39in"}
+
+-   It should be noted that, Nextflow separates the functional logic of the pipeline from the execution platform.
+
 # Tacos with Nextflow
+
+## Overview
+
+In this tutorial, we will:
+
+1.  **Prepare the tortilla** - Choose a tortilla type `flour` or `corn`.
+2.  **Cook the protein** - Choose a protein `steak`, `chicken`, `carnitas` or `sofritas`.
+3.  **Prepare the toppings** - Add your choice of toppings.
+4.  **Assemble the taco** - Combine the tortilla, protein, and toppings into a final taco.
+
+We will be building this tutorial pipeline hands-on.
+
+# Resources
+
+##  {.scrollable}
+
+To help you dive deeper into Nextflow and data-driven workflows, here are some additional resources:
+
+### 1. Nextflow Documentation
+
+-   [Nextflow User Guide](https://www.nextflow.io/docs/latest/index.html)
+
+-   [Nextflow DSL2 Syntax Documentation](https://www.nextflow.io/docs/latest/dsl1.html)
+
+### 2. Tutorials and Guides
+
+-   [Nextflow Tutorials](https://training.nextflow.io/) - Some more hands-on tutorials!
+
+-   [Nextflow YouTube Channel](https://www.youtube.com/c/nextflow) - Video tutorials and presentations by the Nextflow team at Seqera.
+
+### 3. Community and Support
+
+-   [Nextflow Slack](https://www.nextflow.io/slack-invite.html) - Join the Nextflow Slack channel for real-time community support.
+
+-   [Seqera](https://seqera.io/) - Explore a range of solutions offered by Seqera Labs for building and managing workflows at scale.
+
+## 
+
+**Congratulations** on completing the ***Nextflow Workshop!***
+
+**Happy Nextflow-ing!!!** 🚀

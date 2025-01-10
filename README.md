@@ -28,14 +28,14 @@ In this workshop, we will cover the following key topics:
 
 ### 4. "Greetings" with Nextflow:
 
-- Instead of diving into a complex nextflow workflow, we'll start with a simple "Greetings" example.
+- Instead of diving into a complex nextflow workflow, we'll start with a simple ["Greetings"](./greetings/) example.
 - This mini-exercise will introduce you to the basics of creating a Nextflow script, defining processes, and understanding how data flows between steps.
 
 ### 5. The "Tacos with Nextflow" Beginner Pipeline:
 
-- Instead of diving deep into bioinformatics or data-science, we'll use a fun, simple analogy: building a taco recipe.
+- Instead of diving deep into bioinformatics or data-science, we'll use a fun, simple analogy: building a [taco recipe](./tacos/).
 - Think of sequencing data as raw taco ingredients, processes like quality control and mapping as cooking, and the final results as assembling the tacos into a delicious outcome.
-- Here, we will learn about parameters & variable, processes & channels, make modifications to the pipeline and make it scalable.ß
+- Here, we will learn about parameters & variable, processes & channels, make modifications to the pipeline and make it scalable.
 
 ## Conclusion
 

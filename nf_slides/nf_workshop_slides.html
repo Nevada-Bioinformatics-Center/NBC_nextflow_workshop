@@ -575,48 +575,52 @@ Kanishka Manna
 <h1>Getting Started</h1>
 
 </section>
-<section id="nextflow-101" class="slide level2">
-<h2>Nextflow 101</h2>
-<p>Nextflow pipelines have three main parts: <em>processes</em>, <em>channels</em>, and <em>workflows</em>.</p>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li>Understand the structure of a basic Nextflow script</li>
+<li>Create a simple process to print a message</li>
+<li>Define a workflow to run that message</li>
+<li>Execute the script to see the results</li>
+</ol>
 </section>
-<section id="nextflow-101-contd-.." class="slide level2">
-<h2>Nextflow 101 contd ..</h2>
-<ul>
-<li><p>A <strong><em>process</em></strong> defines the command or script to execute, while the <strong><em>executor</em></strong> determines how it’s run on the target system.</p></li>
-<li><p>It should be noted that, Nextflow separates the functional logic of the pipeline from the execution platform.</p></li>
-</ul>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p>So, we will be creating a simple script that prints a welcoming message.</p>
+<p>We want to print the following message by bash code but in nextflow.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="bu">echo</span> <span class="st">"Hello, welcome to the NBC Nextflow Workshop!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="your-first-script" class="slide level2">
 <h2>Your first script</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb12-1"><a href=""></a>#<span class="op">!</span><span class="st">/usr/</span>bin<span class="op">/</span>env nextflow</span>
-<span id="cb12-2"><a href=""></a></span>
-<span id="cb12-3"><a href=""></a><span class="co">// Enable DSL 2 syntax</span></span>
-<span id="cb12-4"><a href=""></a>nextflow<span class="op">.</span>enable<span class="op">.</span>dsl <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb12-5"><a href=""></a></span>
-<span id="cb12-6"><a href=""></a><span class="co">/*</span></span>
-<span id="cb12-7"><a href=""></a><span class="co"> * A Simple Nextflow script to print 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
-<span id="cb12-8"><a href=""></a><span class="co"> */</span></span>
-<span id="cb12-9"><a href=""></a></span>
-<span id="cb12-10"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
-<span id="cb12-11"><a href=""></a> process greetings <span class="op">{</span></span>
-<span id="cb12-12"><a href=""></a>    </span>
-<span id="cb12-13"><a href=""></a>     output<span class="op">:</span></span>
-<span id="cb12-14"><a href=""></a>        stdout</span>
-<span id="cb12-15"><a href=""></a>    </span>
-<span id="cb12-16"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
-<span id="cb12-17"><a href=""></a>     script<span class="op">:</span></span>
-<span id="cb12-18"><a href=""></a>    <span class="st">"""</span></span>
-<span id="cb12-19"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
-<span id="cb12-20"><a href=""></a><span class="st">    """</span></span>
-<span id="cb12-21"><a href=""></a> <span class="op">}</span></span>
-<span id="cb12-22"><a href=""></a></span>
-<span id="cb12-23"><a href=""></a></span>
-<span id="cb12-24"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
-<span id="cb12-25"><a href=""></a> workflow  <span class="op">{</span></span>
-<span id="cb12-26"><a href=""></a></span>
-<span id="cb12-27"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
-<span id="cb12-28"><a href=""></a>     </span>
-<span id="cb12-29"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb13-1"><a href=""></a>#<span class="op">!</span><span class="st">/usr/</span>bin<span class="op">/</span>env nextflow</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a><span class="co">// Enable DSL 2 syntax</span></span>
+<span id="cb13-4"><a href=""></a>nextflow<span class="op">.</span>enable<span class="op">.</span>dsl <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb13-5"><a href=""></a></span>
+<span id="cb13-6"><a href=""></a><span class="co">/*</span></span>
+<span id="cb13-7"><a href=""></a><span class="co"> * A Simple Nextflow script to print 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
+<span id="cb13-8"><a href=""></a><span class="co"> */</span></span>
+<span id="cb13-9"><a href=""></a></span>
+<span id="cb13-10"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
+<span id="cb13-11"><a href=""></a> process greetings <span class="op">{</span></span>
+<span id="cb13-12"><a href=""></a>    </span>
+<span id="cb13-13"><a href=""></a>     output<span class="op">:</span></span>
+<span id="cb13-14"><a href=""></a>        stdout</span>
+<span id="cb13-15"><a href=""></a>    </span>
+<span id="cb13-16"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
+<span id="cb13-17"><a href=""></a>     script<span class="op">:</span></span>
+<span id="cb13-18"><a href=""></a>    <span class="st">"""</span></span>
+<span id="cb13-19"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
+<span id="cb13-20"><a href=""></a><span class="st">    """</span></span>
+<span id="cb13-21"><a href=""></a> <span class="op">}</span></span>
+<span id="cb13-22"><a href=""></a></span>
+<span id="cb13-23"><a href=""></a></span>
+<span id="cb13-24"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
+<span id="cb13-25"><a href=""></a> workflow  <span class="op">{</span></span>
+<span id="cb13-26"><a href=""></a></span>
+<span id="cb13-27"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
+<span id="cb13-28"><a href=""></a>     </span>
+<span id="cb13-29"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="lets-break-down-our-simple-code-.." class="slide level2 scrollable">
 <h2>Let’s break down our simple code ..</h2>
@@ -635,18 +639,18 @@ Kanishka Manna
 <li><p>The <code>greetings</code> process will run the command `echo ‘Hello, welcome to the NBC Nextflow Workshop!’</p></li>
 <li><p>Note: This process does not generate an output file but simply prints the above statement to the console.</p></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb13-1"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
-<span id="cb13-2"><a href=""></a> process greetings <span class="op">{</span></span>
-<span id="cb13-3"><a href=""></a>    </span>
-<span id="cb13-4"><a href=""></a>     output<span class="op">:</span></span>
-<span id="cb13-5"><a href=""></a>        stdout</span>
-<span id="cb13-6"><a href=""></a>    </span>
-<span id="cb13-7"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
-<span id="cb13-8"><a href=""></a>     script<span class="op">:</span></span>
-<span id="cb13-9"><a href=""></a>    <span class="st">"""</span></span>
-<span id="cb13-10"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
-<span id="cb13-11"><a href=""></a><span class="st">    """</span></span>
-<span id="cb13-12"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb14-1"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
+<span id="cb14-2"><a href=""></a> process greetings <span class="op">{</span></span>
+<span id="cb14-3"><a href=""></a>    </span>
+<span id="cb14-4"><a href=""></a>     output<span class="op">:</span></span>
+<span id="cb14-5"><a href=""></a>        stdout</span>
+<span id="cb14-6"><a href=""></a>    </span>
+<span id="cb14-7"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
+<span id="cb14-8"><a href=""></a>     script<span class="op">:</span></span>
+<span id="cb14-9"><a href=""></a>    <span class="st">"""</span></span>
+<span id="cb14-10"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
+<span id="cb14-11"><a href=""></a><span class="st">    """</span></span>
+<span id="cb14-12"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="lets-break-down-our-simple-code" class="slide level2">
 <h2>Let’s break down our simple code</h2>
@@ -657,21 +661,81 @@ Kanishka Manna
 <li><p>The <code>workflow</code> block runs the <code>greetings</code> process.</p></li>
 <li><p>This is where the execution order of processes is defined. Since, it is the only process, it will run once.</p></li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb14-1"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
-<span id="cb14-2"><a href=""></a> workflow  <span class="op">{</span></span>
-<span id="cb14-3"><a href=""></a></span>
-<span id="cb14-4"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
-<span id="cb14-5"><a href=""></a>     </span>
-<span id="cb14-6"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb15-1"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
+<span id="cb15-2"><a href=""></a> workflow  <span class="op">{</span></span>
+<span id="cb15-3"><a href=""></a></span>
+<span id="cb15-4"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
+<span id="cb15-5"><a href=""></a>     </span>
+<span id="cb15-6"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="nextflow-101" class="slide level2">
+<h2>Nextflow 101</h2>
+<p>Nextflow pipelines have three main parts: <em>processes, channels</em> and <em>workflows</em>.</p>
+
+<img data-src="images/process_channels_workflows.png" class="r-stretch quarto-figure-center"><p class="caption">Nextflow process flow diagram</p></section>
+<section id="nextflow-101-contd-.." class="slide level2 scrollable">
+<h2>Nextflow 101 contd ..</h2>
+<ul>
+<li><p>A <strong><em>process</em></strong> defines the command or script to execute, while the <strong><em>executor</em></strong> determines how it’s run on the target system.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/executors.png" style="width:4.39in"></p>
+<figcaption>Nextflow Executors</figcaption>
+</figure>
+</div></li>
+<li><p>It should be noted that, Nextflow separates the functional logic of the pipeline from the execution platform.</p></li>
+</ul>
 </section></section>
+<section>
 <section id="tacos-with-nextflow" class="title-slide slide level1 center">
 <h1>Tacos with Nextflow</h1>
+
+</section>
+<section id="overview" class="slide level2">
+<h2>Overview</h2>
+<p>In this tutorial, we will:</p>
+<ol type="1">
+<li><strong>Prepare the tortilla</strong> - Choose a tortilla type <code>flour</code> or <code>corn</code>.</li>
+<li><strong>Cook the protein</strong> - Choose a protein <code>steak</code>, <code>chicken</code>, <code>carnitas</code> or <code>sofritas</code>.</li>
+<li><strong>Prepare the toppings</strong> - Add your choice of toppings.</li>
+<li><strong>Assemble the taco</strong> - Combine the tortilla, protein, and toppings into a final taco.</li>
+</ol>
+<p>We will be building this tutorial pipeline hands-on.</p>
+</section></section>
+<section>
+<section id="resources" class="title-slide slide level1 center">
+<h1>Resources</h1>
+
+</section>
+<section id="section-5" class="slide level2 scrollable">
+<h2></h2>
+<p>To help you dive deeper into Nextflow and data-driven workflows, here are some additional resources:</p>
+<h3 id="nextflow-documentation">1. Nextflow Documentation</h3>
+<ul>
+<li><p><a href="https://www.nextflow.io/docs/latest/index.html">Nextflow User Guide</a></p></li>
+<li><p><a href="https://www.nextflow.io/docs/latest/dsl1.html">Nextflow DSL2 Syntax Documentation</a></p></li>
+</ul>
+<h3 id="tutorials-and-guides">2. Tutorials and Guides</h3>
+<ul>
+<li><p><a href="https://training.nextflow.io/">Nextflow Tutorials</a> - Some more hands-on tutorials!</p></li>
+<li><p><a href="https://www.youtube.com/c/nextflow">Nextflow YouTube Channel</a> - Video tutorials and presentations by the Nextflow team at Seqera.</p></li>
+</ul>
+<h3 id="community-and-support">3. Community and Support</h3>
+<ul>
+<li><p><a href="https://www.nextflow.io/slack-invite.html">Nextflow Slack</a> - Join the Nextflow Slack channel for real-time community support.</p></li>
+<li><p><a href="https://seqera.io/">Seqera</a> - Explore a range of solutions offered by Seqera Labs for building and managing workflows at scale.</p></li>
+</ul>
+</section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<p><strong>Congratulations</strong> on completing the <strong><em>Nextflow Workshop!</em></strong></p>
+<p><strong>Happy Nextflow-ing!!!</strong> 🚀</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
