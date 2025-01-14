@@ -1,6 +1,6 @@
 ---
 title: "Creating Automated and Reproducible Pipelines with Nextflow"
-author: "Kanishka Manna"
+author: "Nevada Bioinformatics Center | UNR"
 format: 
   revealjs:
     slide-number: true
@@ -42,11 +42,11 @@ Data science pipelines are just like cooking & making Tacos!
 
 # Workflow Management Systems (WFMS)
 
-## 
+##  {.smaller}
 
-**Workflow Management Systems** (WFMS) such as Apache Airflow, Quickbase, Cuneiform, Common Workflow Language, Galaxy, Snakemake, Nextflow are designed to manage computational workflows in fields such as bioinformatics or data science.
+**Workflow Management Systems** (WFMS) is a platform that automates and manages complex workflow/pipelines by defining task dependencies and orchestrating their execution across different computational environments.
 
--   They streamline tasks by defining dependencies and automating processes across different computational environments.
+![Some examples of WFMS ..](images/wfms_logos.png){width="600"}
 
 ## A Traditional Pipeline Wrapped by Scientific WFMS
 
@@ -82,11 +82,11 @@ Data science pipelines are just like cooking & making Tacos!
 
 ::::: columns
 ::: {.column width="50%"}
-![](images/Nextflow_logo.png)
+![](images/Nextflow_logo.png){fig-align="center" width="457"}
 
 -   Groovy-based, flexible, supports complex logic
 
--   Highly scalable, supports cloud, HPC, and containers (Docker/Singularity)
+-   Out-of-the-box executors such as AWS, Google cloud, etc.
 
 -   Emphasizes portability with container integration
 
@@ -94,7 +94,7 @@ Data science pipelines are just like cooking & making Tacos!
 :::
 
 ::: {.column width="50%"}
-![](images/snakemake_logo.png)
+![](images/snakemake_logo.png){fig-align="center" width="476"}
 
 -   Python-based, simple, rule-driven
 
@@ -108,19 +108,28 @@ Data science pipelines are just like cooking & making Tacos!
 
 # Installation & Setup
 
+## Downloading Workshop Materials
+
+The scripts & materials for this workshop is available: <https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop>
+
+To download
+
+``` bash
+# get the git repository
+git clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.git
+```
+
 ## Pre-requisites
 
 Nextflow can be used on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL.
 
-It requires **Java 17 (or later, up to 23)**.
+-   It requires **Java 17 (or later, up to 23)**.
 
 ``` bash
 java -version
 ```
 
 For more information: <https://www.nextflow.io/docs/latest/install.html>
-
-Note: A text editor is useful for coding purposes particularly to write Nextflow scripts. So, it is highly recommended.
 
 ## Installing Java with SDKMAN
 
@@ -150,70 +159,71 @@ If Java is not installed in your system, fret not! Here, we will install through
 
 ## Installing Nextflow
 
-Step 1: Install nextflow by running the following command in the current directory
+::: incremental
+-   Step 1: Install nextflow by running the following command in the current directory
 
-``` bash
-curl -s https://get.nextflow.io | bash
-```
+    ``` bash
+    curl -s https://get.nextflow.io | bash
+    ```
+:::
 
-Step 2: Make Nextflow executable
+::: incremental
+-   Step 2: Make Nextflow executable
 
-``` bash
-chmod +x nextflow
-```
+    ``` bash
+    chmod +x nextflow
+    ```
+:::
 
-Step 3: Move Nextflow into an executable path, e.g.
+##  {.smaller}
 
-``` bash
-mkdir -p $HOME/ .local/bin/
-mv nextflow $HOME/ .local/bin/
-```
+::: incremental
+-   Step 3: Move Nextflow into an executable path.
 
-Step 4: Confirm that Nextflow is installed correctly
+    ``` bash
+    mkdir -p $HOME/.local/bin/
+    mv nextflow $HOME/.local/bin/
+    ```
 
-``` bash
-nextflow info
-```
+-   Ensure the directory `$HOME/.local/bin/` is included in your `PATH` variable. Temporarily add this directory to `PATH`
 
-## Alternative installations {.scrollable}
+    ``` bash
+    export PATH="$PATH:$HOME/.local/bin"
+    ```
 
-### Install via Visual Studio Code editor
+    Then, add this `PATH` permanently by adding the export command to your shell configuration file, such as `~/.bashrc` or `~/.zshrc`.
+:::
 
--   Download \[Visual Studio Code\](<https://code.visualstudio.com/>). The button or buttons should be specific to your platform and the download package should be installable.
+::: incremental
+-   Step 4: Confirm that Nextflow is installed correctly
 
--   Next, you can add Nextflow language support in Visual Studio Code by clicking the install button on the Nextflow language extension.
+    ``` bash
+    nextflow info
+    ```
+:::
 
-### Install via Conda
+## Installing Visual Studio Code editor {.scrollable}
 
-``` bash
-conda install bioconda::nextflow
-
-# Or
-
-mamba install nextflow
-```
-
-## Setting up our Workshop Directory
-
-Each workshop attendees should setup a training folder e.g. `nf_workshop`
-
-``` bash
-mkdir nf_workshop
-cd nf_workshop
-```
-
-## Downloading Workshop Materials
-
-The scripts and materials for this workshop can be found in the \[Nevada Bioinformatics Center\](<https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop>).
-
-To download, go to the ..
-
-``` bash
-# get the git repository
-git clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.git
-```
+-   Step 1: Download [Visual Studio Code](https://code.visualstudio.com/){.uri}. The button or buttons should be specific to your platform and the download package should be installable.
+-   Step 2: Add Nextflow language support in Visual Studio Code by clicking the install button on the Nextflow language extension.
 
 # Getting Started
+
+## Nextflow 101
+
+Nextflow pipelines have three main parts: *processes, channels* and *workflows*.
+
+![Nextflow process flow diagram](images/process_channels_workflows.png)
+
+## Nextflow 101 contd ..
+
+::: incremental
+-   A ***process*** defines the command or script to execute, while the ***executor*** determines how it's run on the target system.
+
+    ![Nextflow executors](images/executors.png){width="306"}
+
+-   Nextflow separates the functional logic of the pipeline from the execution platform.
+:::
 
 ## Objectives
 
@@ -222,11 +232,9 @@ git clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.
 3.  Define a workflow to run that message
 4.  Execute the script to see the results
 
-## 
+## Task
 
-So, we will be creating a simple script that prints a welcoming message.
-
-We want to print the following message by bash code but in nextflow.
+#### We want to print the following *welcoming message* via bash code but in nextflow.
 
 ``` bash
 echo "Hello, welcome to the NBC Nextflow Workshop!"
@@ -312,19 +320,13 @@ nextflow.enable.dsl = 2
  }
 ```
 
-## Nextflow 101
+## Executing Our Code
 
-Nextflow pipelines have three main parts: *processes, channels* and *workflows*.
+Execute the script by entering the following command in your terminal:
 
-![Nextflow process flow diagram](images/process_channels_workflows.png)
-
-## Nextflow 101 contd .. {.scrollable}
-
--   A ***process*** defines the command or script to execute, while the ***executor*** determines how it's run on the target system.
-
-    ![Nextflow Executors](images/executors.png){width="4.39in"}
-
--   It should be noted that, Nextflow separates the functional logic of the pipeline from the execution platform.
+``` bash
+nextflow run greetings.nf
+```
 
 # Tacos with Nextflow
 
@@ -337,7 +339,23 @@ In this tutorial, we will:
 3.  **Prepare the toppings** - Add your choice of toppings.
 4.  **Assemble the taco** - Combine the tortilla, protein, and toppings into a final taco.
 
-We will be building this tutorial pipeline hands-on.
+We will be building this tutorial pipeline hands-on!
+
+## Generating Execution report
+
+Let's create an HTML execution report - which includes useful metrics about the workflow execution.
+
+``` bash
+nextflow run <pipeline> -with-report [file-name]
+```
+
+The report is organised in the three main sections:
+
+-    `Summary`
+
+-   `Resources`
+
+-    `Tasks`
 
 # Resources
 
