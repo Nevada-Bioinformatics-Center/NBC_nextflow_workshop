@@ -10,7 +10,7 @@
 <link href="nf_workshop_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <meta name="author" content="Kanishka Manna">
+  <meta name="author" content="Nevada Bioinformatics Center | UNR">
   <title>Creating Automated and Reproducible Pipelines with Nextflow</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -398,7 +398,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Kanishka Manna 
+Nevada Bioinformatics Center | UNR 
 </div>
 </div>
 </div>
@@ -441,13 +441,11 @@ Kanishka Manna
 <h1>Workflow Management Systems (WFMS)</h1>
 
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-1" class="slide level2 smaller">
 <h2></h2>
-<p><strong>Workflow Management Systems</strong> (WFMS) such as Apache Airflow, Quickbase, Cuneiform, Common Workflow Language, Galaxy, Snakemake, Nextflow are designed to manage computational workflows in fields such as bioinformatics or data science.</p>
-<ul>
-<li>They streamline tasks by defining dependencies and automating processes across different computational environments.</li>
-</ul>
-</section>
+<p><strong>Workflow Management Systems</strong> (WFMS) is a platform that automates and manages complex workflow/pipelines by defining task dependencies and orchestrating their execution across different computational environments.</p>
+
+<img data-src="images/wfms_logos.png" width="600" class="r-stretch quarto-figure-center"><p class="caption">Some examples of WFMS ..</p></section>
 <section id="a-traditional-pipeline-wrapped-by-scientific-wfms" class="slide level2">
 <h2>A Traditional Pipeline Wrapped by Scientific WFMS</h2>
 
@@ -487,15 +485,23 @@ Kanishka Manna
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="images/Nextflow_logo.png"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Nextflow_logo.png" class="quarto-figure quarto-figure-center" width="457"></p>
+</figure>
+</div>
 <ul>
 <li><p>Groovy-based, flexible, supports complex logic</p></li>
-<li><p>Highly scalable, supports cloud, HPC, and containers (Docker/Singularity)</p></li>
+<li><p>Out-of-the-box executors such as AWS, Google cloud, etc.</p></li>
 <li><p>Emphasizes portability with container integration</p></li>
 <li><p>Seqera &amp; growing community, supports multi-platform workflows</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/snakemake_logo.png"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/snakemake_logo.png" class="quarto-figure quarto-figure-center" width="476"></p>
+</figure>
+</div>
 <ul>
 <li><p>Python-based, simple, rule-driven</p></li>
 <li><p>Local, clusters, and cloud with built-in scheduler support</p></li>
@@ -509,71 +515,101 @@ Kanishka Manna
 <h1>Installation &amp; Setup</h1>
 
 </section>
+<section id="downloading-workshop-materials" class="slide level2">
+<h2>Downloading Workshop Materials</h2>
+<p>The scripts &amp; materials for this workshop is available: <a href="https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop" class="uri">https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop</a></p>
+<p>To download</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="co"># get the git repository</span></span>
+<span id="cb1-2"><a href=""></a><span class="fu">git</span> clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="pre-requisites" class="slide level2">
 <h2>Pre-requisites</h2>
 <p>Nextflow can be used on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL.</p>
-<p>It requires <strong>Java 17 (or later, up to 23)</strong>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>It requires <strong>Java 17 (or later, up to 23)</strong>.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For more information: <a href="https://www.nextflow.io/docs/latest/install.html" class="uri">https://www.nextflow.io/docs/latest/install.html</a></p>
-<p>Note: A text editor is useful for coding purposes particularly to write Nextflow scripts. So, it is highly recommended.</p>
 </section>
 <section id="installing-java-with-sdkman" class="slide level2">
 <h2>Installing Java with SDKMAN</h2>
 <p>If Java is not installed in your system, fret not! Here, we will install through <a href="https://sdkman.io/">SDKMAN!</a></p>
 <ol type="1">
 <li><p>Install SDKMAN!</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="ex">curl</span> <span class="at">-s</span> https://get.sdkman.io <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">curl</span> <span class="at">-s</span> https://get.sdkman.io <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Open a new terminal or console</p></li>
 <li><p>Install Java</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">sdk</span> install java 17.0.10-tem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">sdk</span> install java 17.0.10-tem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Confirm that Java is installed correctly</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="ex">java</span> <span class="at">-version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For more information, see this <a href="https://whichjdk.com/">website</a>.</p></li>
 </ol>
 </section>
 <section id="installing-nextflow" class="slide level2">
 <h2>Installing Nextflow</h2>
-<p>Step 1: Install nextflow by running the following command in the current directory</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="ex">curl</span> <span class="at">-s</span> https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Step 2: Make Nextflow executable</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">chmod</span> +x nextflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Step 3: Move Nextflow into an executable path, e.g.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$HOME</span>/ .local/bin/</span>
-<span id="cb7-2"><a href=""></a><span class="fu">mv</span> nextflow <span class="va">$HOME</span>/ .local/bin/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Step 4: Confirm that Nextflow is installed correctly</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">nextflow</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="alternative-installations" class="slide level2 scrollable">
-<h2>Alternative installations</h2>
-<h3 id="install-via-visual-studio-code-editor">Install via Visual Studio Code editor</h3>
+<div>
 <ul>
-<li><p>Download [Visual Studio Code](<a href="https://code.visualstudio.com/" class="uri">https://code.visualstudio.com/</a>). The button or buttons should be specific to your platform and the download package should be installable.</p></li>
-<li><p>Next, you can add Nextflow language support in Visual Studio Code by clicking the install button on the Nextflow language extension.</p></li>
+<li class="fragment"><p>Step 1: Install nextflow by running the following command in the current directory</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="ex">curl</span> <span class="at">-s</span> https://get.nextflow.io <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<h3 id="install-via-conda">Install via Conda</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="ex">conda</span> install bioconda::nextflow</span>
-<span id="cb9-2"><a href=""></a></span>
-<span id="cb9-3"><a href=""></a><span class="co"># Or</span></span>
-<span id="cb9-4"><a href=""></a></span>
-<span id="cb9-5"><a href=""></a><span class="ex">mamba</span> install nextflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div>
+<ul>
+<li class="fragment"><p>Step 2: Make Nextflow executable</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="fu">chmod</span> +x nextflow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</div>
 </section>
-<section id="setting-up-our-workshop-directory" class="slide level2">
-<h2>Setting up our Workshop Directory</h2>
-<p>Each workshop attendees should setup a training folder e.g.&nbsp;<code>nf_workshop</code></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">mkdir</span> nf_workshop</span>
-<span id="cb10-2"><a href=""></a><span class="bu">cd</span> nf_workshop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="section-4" class="slide level2 smaller">
+<h2></h2>
+<div>
+<ul>
+<li class="fragment"><p>Step 3: Move Nextflow into an executable path.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$HOME</span>/.local/bin/</span>
+<span id="cb8-2"><a href=""></a><span class="fu">mv</span> nextflow <span class="va">$HOME</span>/.local/bin/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li class="fragment"><p>Ensure the directory <code>$HOME/.local/bin/</code> is included in your <code>PATH</code> variable. Temporarily add this directory to <code>PATH</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.local/bin"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, add this <code>PATH</code> permanently by adding the export command to your shell configuration file, such as <code>~/.bashrc</code> or <code>~/.zshrc</code>.</p></li>
+</ul>
+</div>
+<div>
+<ul>
+<li class="fragment"><p>Step 4: Confirm that Nextflow is installed correctly</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="ex">nextflow</span> info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</div>
 </section>
-<section id="downloading-workshop-materials" class="slide level2">
-<h2>Downloading Workshop Materials</h2>
-<p>The scripts and materials for this workshop can be found in the [Nevada Bioinformatics Center](<a href="https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop" class="uri">https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop</a>).</p>
-<p>To download, go to the ..</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="co"># get the git repository</span></span>
-<span id="cb11-2"><a href=""></a><span class="fu">git</span> clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="installing-visual-studio-code-editor" class="slide level2 scrollable">
+<h2>Installing Visual Studio Code editor</h2>
+<ul>
+<li>Step 1: Download <a href="https://code.visualstudio.com/" class="uri">Visual Studio Code</a>. The button or buttons should be specific to your platform and the download package should be installable.</li>
+<li>Step 2: Add Nextflow language support in Visual Studio Code by clicking the install button on the Nextflow language extension.</li>
+</ul>
 </section></section>
 <section>
 <section id="getting-started" class="title-slide slide level1 center">
 <h1>Getting Started</h1>
 
+</section>
+<section id="nextflow-101" class="slide level2">
+<h2>Nextflow 101</h2>
+<p>Nextflow pipelines have three main parts: <em>processes, channels</em> and <em>workflows</em>.</p>
+
+<img data-src="images/process_channels_workflows.png" class="r-stretch quarto-figure-center"><p class="caption">Nextflow process flow diagram</p></section>
+<section id="nextflow-101-contd-.." class="slide level2">
+<h2>Nextflow 101 contd ..</h2>
+<div>
+<ul>
+<li class="fragment"><p>A <strong><em>process</em></strong> defines the command or script to execute, while the <strong><em>executor</em></strong> determines how it’s run on the target system.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/executors.png" width="306"></p>
+<figcaption>Nextflow executors</figcaption>
+</figure>
+</div></li>
+<li class="fragment"><p>Nextflow separates the functional logic of the pipeline from the execution platform.</p></li>
+</ul>
+</div>
 </section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
@@ -584,43 +620,42 @@ Kanishka Manna
 <li>Execute the script to see the results</li>
 </ol>
 </section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<p>So, we will be creating a simple script that prints a welcoming message.</p>
-<p>We want to print the following message by bash code but in nextflow.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="bu">echo</span> <span class="st">"Hello, welcome to the NBC Nextflow Workshop!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="task" class="slide level2">
+<h2>Task</h2>
+<h4 id="we-want-to-print-the-following-welcoming-message-via-bash-code-but-in-nextflow.">We want to print the following <em>welcoming message</em> via bash code but in nextflow.</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="bu">echo</span> <span class="st">"Hello, welcome to the NBC Nextflow Workshop!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="your-first-script" class="slide level2">
 <h2>Your first script</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb13-1"><a href=""></a>#<span class="op">!</span><span class="st">/usr/</span>bin<span class="op">/</span>env nextflow</span>
-<span id="cb13-2"><a href=""></a></span>
-<span id="cb13-3"><a href=""></a><span class="co">// Enable DSL 2 syntax</span></span>
-<span id="cb13-4"><a href=""></a>nextflow<span class="op">.</span>enable<span class="op">.</span>dsl <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb13-5"><a href=""></a></span>
-<span id="cb13-6"><a href=""></a><span class="co">/*</span></span>
-<span id="cb13-7"><a href=""></a><span class="co"> * A Simple Nextflow script to print 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
-<span id="cb13-8"><a href=""></a><span class="co"> */</span></span>
-<span id="cb13-9"><a href=""></a></span>
-<span id="cb13-10"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
-<span id="cb13-11"><a href=""></a> process greetings <span class="op">{</span></span>
-<span id="cb13-12"><a href=""></a>    </span>
-<span id="cb13-13"><a href=""></a>     output<span class="op">:</span></span>
-<span id="cb13-14"><a href=""></a>        stdout</span>
-<span id="cb13-15"><a href=""></a>    </span>
-<span id="cb13-16"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
-<span id="cb13-17"><a href=""></a>     script<span class="op">:</span></span>
-<span id="cb13-18"><a href=""></a>    <span class="st">"""</span></span>
-<span id="cb13-19"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
-<span id="cb13-20"><a href=""></a><span class="st">    """</span></span>
-<span id="cb13-21"><a href=""></a> <span class="op">}</span></span>
-<span id="cb13-22"><a href=""></a></span>
-<span id="cb13-23"><a href=""></a></span>
-<span id="cb13-24"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
-<span id="cb13-25"><a href=""></a> workflow  <span class="op">{</span></span>
-<span id="cb13-26"><a href=""></a></span>
-<span id="cb13-27"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
-<span id="cb13-28"><a href=""></a>     </span>
-<span id="cb13-29"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb12-1"><a href=""></a>#<span class="op">!</span><span class="st">/usr/</span>bin<span class="op">/</span>env nextflow</span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a><span class="co">// Enable DSL 2 syntax</span></span>
+<span id="cb12-4"><a href=""></a>nextflow<span class="op">.</span>enable<span class="op">.</span>dsl <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb12-5"><a href=""></a></span>
+<span id="cb12-6"><a href=""></a><span class="co">/*</span></span>
+<span id="cb12-7"><a href=""></a><span class="co"> * A Simple Nextflow script to print 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
+<span id="cb12-8"><a href=""></a><span class="co"> */</span></span>
+<span id="cb12-9"><a href=""></a></span>
+<span id="cb12-10"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
+<span id="cb12-11"><a href=""></a> process greetings <span class="op">{</span></span>
+<span id="cb12-12"><a href=""></a>    </span>
+<span id="cb12-13"><a href=""></a>     output<span class="op">:</span></span>
+<span id="cb12-14"><a href=""></a>        stdout</span>
+<span id="cb12-15"><a href=""></a>    </span>
+<span id="cb12-16"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
+<span id="cb12-17"><a href=""></a>     script<span class="op">:</span></span>
+<span id="cb12-18"><a href=""></a>    <span class="st">"""</span></span>
+<span id="cb12-19"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
+<span id="cb12-20"><a href=""></a><span class="st">    """</span></span>
+<span id="cb12-21"><a href=""></a> <span class="op">}</span></span>
+<span id="cb12-22"><a href=""></a></span>
+<span id="cb12-23"><a href=""></a></span>
+<span id="cb12-24"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
+<span id="cb12-25"><a href=""></a> workflow  <span class="op">{</span></span>
+<span id="cb12-26"><a href=""></a></span>
+<span id="cb12-27"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
+<span id="cb12-28"><a href=""></a>     </span>
+<span id="cb12-29"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="lets-break-down-our-simple-code-.." class="slide level2 scrollable">
 <h2>Let’s break down our simple code ..</h2>
@@ -639,18 +674,18 @@ Kanishka Manna
 <li><p>The <code>greetings</code> process will run the command `echo ‘Hello, welcome to the NBC Nextflow Workshop!’</p></li>
 <li><p>Note: This process does not generate an output file but simply prints the above statement to the console.</p></li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb14-1"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
-<span id="cb14-2"><a href=""></a> process greetings <span class="op">{</span></span>
-<span id="cb14-3"><a href=""></a>    </span>
-<span id="cb14-4"><a href=""></a>     output<span class="op">:</span></span>
-<span id="cb14-5"><a href=""></a>        stdout</span>
-<span id="cb14-6"><a href=""></a>    </span>
-<span id="cb14-7"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
-<span id="cb14-8"><a href=""></a>     script<span class="op">:</span></span>
-<span id="cb14-9"><a href=""></a>    <span class="st">"""</span></span>
-<span id="cb14-10"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
-<span id="cb14-11"><a href=""></a><span class="st">    """</span></span>
-<span id="cb14-12"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb13-1"><a href=""></a><span class="co">// Define a process called 'greetings' that will output to standard output</span></span>
+<span id="cb13-2"><a href=""></a> process greetings <span class="op">{</span></span>
+<span id="cb13-3"><a href=""></a>    </span>
+<span id="cb13-4"><a href=""></a>     output<span class="op">:</span></span>
+<span id="cb13-5"><a href=""></a>        stdout</span>
+<span id="cb13-6"><a href=""></a>    </span>
+<span id="cb13-7"><a href=""></a>    <span class="co">// The script section that prints the statement</span></span>
+<span id="cb13-8"><a href=""></a>     script<span class="op">:</span></span>
+<span id="cb13-9"><a href=""></a>    <span class="st">"""</span></span>
+<span id="cb13-10"><a href=""></a><span class="st">    echo 'Hello, welcome to the NBC Nextflow Workshop!'</span></span>
+<span id="cb13-11"><a href=""></a><span class="st">    """</span></span>
+<span id="cb13-12"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="lets-break-down-our-simple-code" class="slide level2">
 <h2>Let’s break down our simple code</h2>
@@ -661,30 +696,17 @@ Kanishka Manna
 <li><p>The <code>workflow</code> block runs the <code>greetings</code> process.</p></li>
 <li><p>This is where the execution order of processes is defined. Since, it is the only process, it will run once.</p></li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb15-1"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
-<span id="cb15-2"><a href=""></a> workflow  <span class="op">{</span></span>
-<span id="cb15-3"><a href=""></a></span>
-<span id="cb15-4"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
-<span id="cb15-5"><a href=""></a>     </span>
-<span id="cb15-6"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource groovy number-lines code-with-copy"><code class="sourceCode groovy"><span id="cb14-1"><a href=""></a><span class="co">// Workflow definition: Calls the 'greetings' process</span></span>
+<span id="cb14-2"><a href=""></a> workflow  <span class="op">{</span></span>
+<span id="cb14-3"><a href=""></a></span>
+<span id="cb14-4"><a href=""></a>    <span class="fu">greetings</span><span class="op">()</span></span>
+<span id="cb14-5"><a href=""></a>     </span>
+<span id="cb14-6"><a href=""></a> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="nextflow-101" class="slide level2">
-<h2>Nextflow 101</h2>
-<p>Nextflow pipelines have three main parts: <em>processes, channels</em> and <em>workflows</em>.</p>
-
-<img data-src="images/process_channels_workflows.png" class="r-stretch quarto-figure-center"><p class="caption">Nextflow process flow diagram</p></section>
-<section id="nextflow-101-contd-.." class="slide level2 scrollable">
-<h2>Nextflow 101 contd ..</h2>
-<ul>
-<li><p>A <strong><em>process</em></strong> defines the command or script to execute, while the <strong><em>executor</em></strong> determines how it’s run on the target system.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/executors.png" style="width:4.39in"></p>
-<figcaption>Nextflow Executors</figcaption>
-</figure>
-</div></li>
-<li><p>It should be noted that, Nextflow separates the functional logic of the pipeline from the execution platform.</p></li>
-</ul>
+<section id="executing-our-code" class="slide level2">
+<h2>Executing Our Code</h2>
+<p>Execute the script by entering the following command in your terminal:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="ex">nextflow</span> run greetings.nf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="tacos-with-nextflow" class="title-slide slide level1 center">
@@ -700,7 +722,18 @@ Kanishka Manna
 <li><strong>Prepare the toppings</strong> - Add your choice of toppings.</li>
 <li><strong>Assemble the taco</strong> - Combine the tortilla, protein, and toppings into a final taco.</li>
 </ol>
-<p>We will be building this tutorial pipeline hands-on.</p>
+<p>We will be building this tutorial pipeline hands-on!</p>
+</section>
+<section id="generating-execution-report" class="slide level2">
+<h2>Generating Execution report</h2>
+<p>Let’s create an HTML execution report - which includes useful metrics about the workflow execution.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href=""></a><span class="ex">nextflow</span> run <span class="op">&lt;</span>pipeline<span class="op">&gt;</span> -with-report <span class="pp">[</span><span class="ss">file</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The report is organised in the three main sections:</p>
+<ul>
+<li><p><code>Summary</code></p></li>
+<li><p><code>Resources</code></p></li>
+<li><p><code>Tasks</code></p></li>
+</ul>
 </section></section>
 <section>
 <section id="resources" class="title-slide slide level1 center">
