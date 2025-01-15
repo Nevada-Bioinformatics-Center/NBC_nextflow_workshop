@@ -2,6 +2,18 @@
 
 Welcome! Here, you'll learn how to create a basic Nextflow workflow. By the end of this tutorial, you'll be able to define a simple process in Nextflow and execute a workflow that prints a greeting message to the console/terminal.
 
+- [Creating a Simple Greeting Workflow](#creating-a-simple-greeting-workflow)
+  - [Learning Objectives](#learning-objectives)
+  - [What You'll Need](#what-youll-need)
+  - [Step 1: Setting Up Your Nextflow Script](#step-1-setting-up-your-nextflow-script)
+    - [Create the Script](#create-the-script)
+  - [Step 2: Running the Script](#step-2-running-the-script)
+    - [Run the Script](#run-the-script)
+    - [Expected Output](#expected-output)
+
+
+## Learning Objectives
+
 In this tutorial, we will:
 
 1. Understand the structure of a basic Nextflow script.

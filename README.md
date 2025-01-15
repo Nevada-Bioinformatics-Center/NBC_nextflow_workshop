@@ -2,11 +2,16 @@
 
 Welcome to the Nextflow Workshop! In this session, we will learn how to create automated, reproducible pipelines using **Nextflow**. Whether, you're new to bioinformatics or data science workflows or have some experience with other pipeline management systems, this workshop will guide you through the process of building a simple yet powerful pipeline.
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Workshop Overview](#workshop-overview)
+- [End Note](#end-note)
+
 ## Prerequisites
 
 - Basic UNIX coding skills
 - Text editor (optional but highly recommended - VS Code)
-- GitHub account (optional)
 
 ## Workshop Overview
 
@@ -31,14 +36,22 @@ In this workshop, we will cover the following key topics:
 - Instead of diving into a complex nextflow workflow, we'll start with a simple ["Greetings"](./greetings/) example.
 - This mini-exercise will introduce you to the basics of creating a Nextflow script, defining processes, and understanding how data flows between steps.
 
-### 5. The "Tacos with Nextflow" Beginner Pipeline:
+### 5. "Tacos with Nextflow" Beginner Pipeline:
 
-- Instead of diving deep into bioinformatics or data-science, we'll use a fun, simple analogy: building a [taco recipe](./tacos/).
+- Instead of diving deep into bioinformatics or data-science, we'll use a fun, simple analogy: building a [taco recipe](./tacos/) 🌮🎉.
 - Think of sequencing data as raw taco ingredients, processes like quality control and mapping as cooking, and the final results as assembling the tacos into a delicious outcome.
 - Here, we will learn about parameters & variable, processes & channels, make modifications to the pipeline and make it scalable.
 
-## Conclusion
+## End note!
 
 This workshop will introduce you to the fundamentals of Nextflow and demonstrate how to automate reproducible pipelines with ease. By the end of the session, you will be equipped to build, modify, and share your own bioinformatics or data science pipelines.
 
-We hope you enjoy the workshop and that it sparks creativity in automating your own bioinformatics or data science pipelines!
+### Resources
+
+- [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
+- [Nextflow homepage](https://nextflow.io/)
+- [Nextflow slack](https://nextflow.slack.com/join/shared_invite/zt-2viwl0txy-FnMU~L7gAsZCAdutGc_00w#/shared-invite/email)
+- [Seqera homepage](https://seqera.io/)
+
+
+We hope you enjoy the workshop and that it sparks creativity in automating your own bioinformatics or data science pipelines! **Happy Nextflow-ing!** 🚀🎉
