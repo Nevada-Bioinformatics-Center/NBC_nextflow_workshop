@@ -24,6 +24,7 @@ process prepareTortilla {
     
     script:
     """
+    ping -t 30 google.com > /dev/null
     echo "Preparing ${tortilla_type} tortilla .. " > tortilla.txt
     """
 }
@@ -42,6 +43,7 @@ process cookProtein {
 
     script:
     """
+    ping -t 30 google.com > /dev/null
     echo "Cooking ${protein_type} .. " > cooked_protein.txt
     """
 }
@@ -60,6 +62,7 @@ process prepareToppings {
     
     script:
     """
+    ping -t 30 google.com > /dev/null
     echo "Preparing toppings: ${toppings_list} .. " > toppings.txt
     """
 }
@@ -80,6 +83,8 @@ process assembleTaco {
     
     script:
     """
+    ping -t 30 google.com > /dev/null
+
     # Create the assembled taco output file with the introductory line
     echo "Assembling taco with the following ingredients:" > assembled_taco.txt
 
@@ -146,4 +151,15 @@ workflow  {
     println ( "Taco-making tutorial completed!" )
     println ( "The taco has been assembled and saved to 'assembled_taco.txt'." )
     println ( "Feel free to modify the parameters to make your own customized taco!" )
+
+    workflow.onComplete = {
+        // Any workflow property can be used here
+    println "Pipeline completed at: $workflow.complete"
+    println "Execution status: ${workflow.success ? 'OK' : 'failed' }"
+    println "Command line: $workflow.commandLine"
+    }
+
+    workflow.onError = {
+    println "Error: Pipeline execution stopped with the following message: ${workflow.errorMessage}"
+    }
 }

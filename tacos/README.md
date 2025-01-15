@@ -1,6 +1,15 @@
-# Nextflow Taco-Making Tutorial
+# Nextflow Taco-Making Tutorial 🌮🌮🌮
 
 Welcome to the Nextflow Taco-Making Tutorial! This tutorial will guide you through creating a taco-making pipeline using Nextflow, where you can customize your taco with different proteins, tortillas, and toppings. You'll learn to use Nextflow to handle different stages of a pipeline and how to make your own taco recipes using parameterized processes.
+
+- [Nextflow Taco-Making Tutorial 🌮🌮🌮](#nextflow-taco-making-tutorial-)
+  - [Overview](#overview)
+  - [What You'll Need](#what-youll-need)
+  - [Running the Pipeline](#running-the-pipeline)
+  - [Help Message](#help-message)
+  - [Pipeline Details](#pipeline-details)
+  - [Additional Customizations](#additional-customizations)
+  - [End note!](#end-note)
 
 ## Overview
 
@@ -87,7 +96,7 @@ You can modify the pipeline to suit your needs by:
 - Changing the protein or tortilla options.
 - Altering the process to include more customizations or additional steps.
 
-## Conclusion
+## End note!
 
 Congratulations! You've successfully created your own taco-making pipeline using Nextflow. Now you can experiment with different combinations of ingredients and processes to create your own taco recipes in Nextflow!
 
