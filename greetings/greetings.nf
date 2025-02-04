@@ -7,6 +7,7 @@ nextflow.enable.dsl = 2
  * A Simple Nextflow script to print 'Hello, welcome to the NBC Nextflow Workshop!'
  */
 
+
 // In this section we will define a process called 'greetings' that will print to standard out
 // Type in the process name 'greetings'
 

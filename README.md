@@ -6,7 +6,9 @@ Welcome to the Nextflow Workshop! In this session, we will learn how to create a
 
 - [Prerequisites](#prerequisites)
 - [Workshop Overview](#workshop-overview)
+- [Downloading Workshop Materials](#downloading-workshop-materials)
 - [End Note](#end-note)
+- [Resources](#resources)
 
 ## Prerequisites
 
@@ -41,6 +43,14 @@ In this workshop, we will cover the following key topics:
 - Instead of diving deep into bioinformatics or data-science, we'll use a fun, simple analogy: building a [taco recipe](./tacos/) 🌮🎉.
 - Think of sequencing data as raw taco ingredients, processes like quality control and mapping as cooking, and the final results as assembling the tacos into a delicious outcome.
 - Here, we will learn about parameters & variable, processes & channels, make modifications to the pipeline and make it scalable.
+
+## Downloading Workshop Materials
+
+GitHub repository: https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop
+To download:
+```
+git clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.git
+```
 
 ## End note!
 
