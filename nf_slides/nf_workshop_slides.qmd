@@ -8,7 +8,7 @@ format:
     highlight-style: a11y
     chalkboard: true
     theme:
-      - nceas_styles.scss
+      - nbc-nf_styles.scss
 editor: visual
 ---
 
@@ -123,13 +123,43 @@ git clone https://github.com/Nevada-Bioinformatics-Center/NBC_nextflow_workshop.
 
 Nextflow can be used on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL.
 
--   It requires **Java 17 (or later, up to 23)**.
+It requires **Java 17 (or later, up to 23)**.
+
+First let's check if Java is installed in the system or not ..
 
 ``` bash
 java -version
 ```
 
 For more information: <https://www.nextflow.io/docs/latest/install.html>
+
+## Installing Windows Subsystem for Linux (WSL) for Windows Users
+
+*Prerequisites*
+
+-   Must be running Windows 10 version 2004 and higher or Windows 11
+
+-   PowerShell (recommended) or Windows Command Prompt
+
+## Installing Windows Subsystem for Linux (WSL) for Windows Users {.scrollable}
+
+-   Step 1: Open PowerShell or Windows Command Prompt in administrator mode by right-clicking and selecting **Run administrator**
+
+-   Step 2: Enter the following command
+
+    ``` bash
+    wsl --install
+    ```
+
+-   Step 3: Follow the prompts. Restart your computer (if when prompted).
+
+By default, the Linux distribution will be *Ubuntu*.
+
+-   Optional: If you want to choose/ change the Linux distribution
+
+    ``` bash
+    wsl --instal -d <Distribution Name>
+    ```
 
 ## Installing Java with SDKMAN
 
@@ -386,3 +416,7 @@ To help you dive deeper into Nextflow and data-driven workflows, here are some a
 **Congratulations** on completing the ***Nextflow Workshop!***
 
 **Happy Nextflow-ing!!!** 🚀
+
+## 
+
+![Thank you for attending our workshop! We'd love to hear your thoughts. Please take a moment to scan the QR code and fill out our quick evaluation. Your feedback helps us improve and deliver even better experiences in the future!](images/EvalQRpng.png){width="300"}
